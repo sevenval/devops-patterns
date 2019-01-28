@@ -22,7 +22,7 @@ RUN npm run test
 
 # build release image
 FROM base AS release
-COPY --from=dependencies /app/prod_node_modules ./node_modules
+COPY --from=test /app/prod_node_modules ./node_modules
 COPY . .
 EXPOSE 5555
 CMD npm run start

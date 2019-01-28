@@ -1,12 +1,12 @@
 version: '2.3'
 services:
 
-  deploy-myapp:
+  deploy-myenvironment:
     build:
       context: ./ops/sloppy
     env_file:
-      - environments/myapp/sloppy.env
-      - environments/myapp/myapp.env
+      - environments/myenvironment/sloppy.env
+      - environments/myenvironment/myenvironment.env
     environment:
       - SLOPPY_APITOKEN
       - DRY_RUN

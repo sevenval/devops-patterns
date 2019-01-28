@@ -2,7 +2,7 @@ version: "v1"
 project: "{{.Env.ENVIRONMENT}}"
 services:
   frontend:
-    myapp:
+    myenvironment:
       image: "{{ .Env.MYAPP_IMAGE }}:{{ .Env.VERSION }}"
       instances: "{{ .Env.MYAPP_INSTANCES }}"
       mem: "{{ .Env.MYAPP_MEM }}"
