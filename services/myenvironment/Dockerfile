@@ -17,7 +17,7 @@ RUN npm install
 
 # run tests
 FROM dependencies AS test
-COPY  . .
+COPY  src .
 RUN npm run test
 
 # build release image
