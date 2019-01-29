@@ -1,0 +1,11 @@
+version: "v1"
+project: "{{.Env.ENVIRONMENT}}"
+services:
+  frontend:
+    myenvironment:
+      image: "{{ .Env.MYAPP_IMAGE }}:{{ .Env.VERSION }}"
+      instances: "{{ .Env.MYAPP_INSTANCES }}"
+      mem: "{{ .Env.MYAPP_MEM }}"
+      env:
+        MYAPP_NAME: "{{ .Env.MYAPP_NAME }}"
+        MYAPP_DOMAIN: "{{ .Env.MYAPP_DOMAIN }}"

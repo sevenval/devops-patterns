@@ -1,2 +1,13 @@
-version: '2,3'
+version: '2.3'
 services:
+
+  deploy-myenvironment:
+    build:
+      context: ./ops/sloppy
+    env_file:
+      - environments/myenvironment/sloppy.env
+      - environments/myenvironment/myenvironment.env
+    environment:
+      - SLOPPY_APITOKEN
+      - DRY_RUN
+      - ENVIRONMENT=development
