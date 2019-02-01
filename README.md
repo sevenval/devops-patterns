@@ -1,3 +1,7 @@
+# Deployment patterns
+
+A template pattern to build, deploy and manage application environments in a
+light and transparent way.
 
 * `Makefile`: Controls all non-local operations, e.g. builds, deployments,
   operations-tasks etc.
@@ -14,10 +18,15 @@
 * `environments/`: Contains environment-specific data necessary for running,
    starting or deploying the application. For the names of the folders the same
    names as in `services/` should be used.
-* `ops/`: Configuration files and templates which control the managemnt
+* `ops/`: Configuration files and templates which control the management
   containers called by `ops/docker-compose.ops.yaml`.
 
-# Structure
+## Setup
+
+Run the script `setup` in the directory which should be prepared an the
+necessary files are copied from the directory `skel/`.
+
+## Structure
 
 ```
 Makefile
