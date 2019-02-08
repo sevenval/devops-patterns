@@ -1,7 +1,12 @@
 # Deployment patterns for Docker
 
 A template pattern to build, deploy and manage applications in Docker
-environments in a light and transparent way.
+environments in a light and transparent way. All environment which have a
+programmatical interface can be used, e.g. Rancher or AWS.
+
+## Requirements
+
+GNU Make, Docker, Docker-compose
 
 It uses Make, Docker and Docker-compose to abstract the specific commands for
 managing the application. Except for the above mentioned programs no other
@@ -52,7 +57,8 @@ ops/
    starting or deploying the application. For the names of the folders the same
    names as in `services/` should be used.
 * `ops/`: Configuration files and templates which control the management
-  containers called by `ops/docker-compose.ops.yaml`.
+  containers called by `ops/docker-compose.ops.yaml`. Fodler names should
+  reflect the functionality, e.g. sloppy-deployment.
 
 ## Setup
 

@@ -2,34 +2,6 @@
 
 set -euo pipefail
 
-###############################################################################
-### define/initialize script wide variables
-
-DEBUG="${DEBUG:-0}"
-PROGNAME="${0##*/}"
-
-if [[ $DEBUG -ne 0 ]] ; then
-   set -x
-fi
-
-################################################################################
-### functions
-# when echoing use "${FUNCNAME[0]}: message"
-
-# echo to STDERR
-function _err_echo () {
-    local msg
-    msg="$*"
-    echo "$PROGNAME: $msg" >&2
-}
-# echo to STDERR and exit
-function _bail () {
-    local message
-    message="$*"
-    _err_echo "$message"
-    exit 2
-}
-
 ### main script
 
 DIRNAME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

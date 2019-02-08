@@ -7,13 +7,14 @@ RUN apk \
     --no-progress \
     nodejs-current
 WORKDIR /app
+# don't copy all of the code to use Docker's caching
 COPY package.json package-lock.json ./
 
 # install dependencies
 FROM base AS dependencies
-RUN npm install --only=production
+RUN npm install --silent --only=production
 RUN cp -R node_modules prod_node_modules
-RUN npm install
+RUN npm --silent install
 
 # run tests
 FROM dependencies AS test

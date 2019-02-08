@@ -3,7 +3,7 @@ services:
 
   deploy-myenvironment:
     build:
-      context: ./ops/sloppy
+      context: ./ops/sloppy-deployment
     env_file:
       - environments/myenvironment/sloppy.env
       - environments/myenvironment/myenvironment.env
