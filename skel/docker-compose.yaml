@@ -1,0 +1,9 @@
+version: '2.3'
+
+services:
+  myenvironment:
+    build:
+      context: .
+      target: release
+    ports:
+      - "5555:5555"
