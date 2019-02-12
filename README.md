@@ -65,3 +65,14 @@ ops/
 Run the script `setup` in the directory which should be prepared and the
 necessary files are copied from the directory `skel/`.
 
+## Contributing
+
+New ideas, patches and improvements are always welcome. Please do it the usual
+way via opening a Pull Request.
+
+## Authors
+
+The idea and first implementations came from Krispin Schulz
+<krispin.schulz@sevenval.com> (Github @kr1sp1n). Markus "Shorty" Uckelmann
+<markus.uckelmann@sevenval.com> (Github @bemeyert) put it all together in this
+repository.
