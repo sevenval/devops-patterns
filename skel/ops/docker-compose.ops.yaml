@@ -1,7 +1,7 @@
 version: '2.3'
 services:
 
-  deploy-myapp:
+  deploy-development:
     build:
       context: ./ops/sloppy-deployment
     env_file:
