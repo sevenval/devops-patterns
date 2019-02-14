@@ -30,3 +30,6 @@ deploy:
   stage: deploy
   script:
     - make deploy
+  only:
+    refs:
+      - master
