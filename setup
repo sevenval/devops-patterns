@@ -7,5 +7,6 @@ set -euo pipefail
 DIRNAME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cp -r "$DIRNAME"/skel/* .
+cp -r "$DIRNAME"/skel/.??* .
 
 # vim: ts=4 sw=4 expandtab ft=sh
