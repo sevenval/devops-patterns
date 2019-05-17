@@ -19,21 +19,28 @@ IMAGE_NAME="$(REGISTRY)/$(SERVICE)"
 
 ## Targets
 
-version:
+help:
+	@if tty -s ; then \
+		grep -E '^[a-zA-Z_-]+:.*?## .*$$' ${MAKEFILE_LIST} | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'; \
+	else \
+		grep -E '^[a-zA-Z_-]+:.*?## .*$$' ${MAKEFILE_LIST} | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-30s %s\n", $$1, $$2}'; \
+	fi
+
+version: ## Print current version
 	@echo $(VERSION)
 
-build:
+build: ## Build image
 	@docker build \
 		-t $(IMAGE_NAME):$(VERSION) \
 		-f services/$(SERVICE)/Dockerfile \
 		--target release \
 		services/$(SERVICE)
 
-push:
+push: ## Push image
 	@docker push $(IMAGE_NAME):$(VERSION)
 
-deploy:
-	# Build
+deploy: ## Deploy application
+	# Build deploy
 	@docker-compose \
 		-f ops/docker-compose.ops.yml \
 		build \
@@ -41,11 +48,7 @@ deploy:
 		--no-cache \
 		--pull \
 		deploy-$(ENVIRONMENT)
-	# Run
-	@docker-compose \
-		-f ops/docker-compose.ops.yml \
-		run \
-		--rm \
-		-e VERSION=$(VERSION) \
-		deploy-$(ENVIRONMENT)
-# FIXME Cleanup docker-compose stuff!
+	# Run deploy
+	@ops/trap_command.sh \
+		"docker-compose -f ops/docker-compose.ops.yml run -T --rm -e VERSION=$(VERSION) deploy-$(ENVIRONMENT)" \
+		"docker-compose -f ops/docker-compose.ops.yml down -v --remophe-orphans"
