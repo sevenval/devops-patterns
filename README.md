@@ -65,7 +65,7 @@ ops/
 Run the script `setup` in the directory which should be prepared and the
 necessary files are copied from the directory `skel/`.
 
-Then you must change the files according to your needs. In some files "HINT"'s
+Then you must change the files according to your needs. In some files "HINT"s
 are placed to add alternate configuration for different setups. E.g. Gitlab
 Runner in Docker or as process. Do a `fgrep -R HINT` to find them all.
 

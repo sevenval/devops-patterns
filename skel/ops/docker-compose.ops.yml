@@ -13,7 +13,7 @@ services:
       - SLOPPY_DEPLOYMENT_TRACE  # activate tracing of the deployment script
       - ENVIRONMENT=development
       - SLOPPY_SAVE_OUTPUT_DIR=${CI_PROJECT_DIR}/artifacts
-    # mount volumes from Gitlab Runner cotainer to save environment
+    # mount volumes from Gitlab Runner container to save environment
     # configuration as artifact.
     volumes_from:
       - container:${GITLAB_RUNNER_ID}
