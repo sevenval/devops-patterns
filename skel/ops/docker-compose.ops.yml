@@ -1,4 +1,4 @@
-version: '2.3'
+version: '2.4'
 services:
 
   deploy-development:
@@ -9,5 +9,15 @@ services:
       - environments/development/myapp.env
     environment:
       - SLOPPY_APITOKEN
-      - DRY_RUN
+      - DRY_RUN  # Do nothing but print out the configuration.
+      - SLOPPY_DEPLOYMENT_TRACE  # activate tracing of the deployment script
       - ENVIRONMENT=development
+      - SLOPPY_SAVE_OUTPUT_DIR=${CI_PROJECT_DIR}/artifacts
+    # mount volumes from Gitlab Runner container to save environment
+    # configuration as artifact.
+    volumes_from:
+      - container:${GITLAB_RUNNER_ID}
+# HINT!!! If your Runner is a standalone process (not running in Docker) comment
+# out above "volumes_from" directive and uncomment the following two lines.
+#    volumes:
+#      - ${CI_PROJECT_DIR}:${CI_PROJECT_DIR}

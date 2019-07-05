@@ -1,13 +1,18 @@
 image: 7val/gitlab-job
 
-# Make sure we can start Docker
-services:
-  - docker:dind
+##### HINT!!! If you're runner is not a Docker runner uncomment the following
+#####         configuration.
 
-# When using dind, it's wise to use the overlayfs driver for
-# improved performance.
-variables:
-  DOCKER_DRIVER: overlay2
+## Make sure we can start Docker
+#services:
+#  - docker:dind
+#
+## When using dind, it's wise to use the overlayfs driver for
+## improved performance.
+#variables:
+#  DOCKER_DRIVER: overlay2
+
+##### END HINT
 
 stages:
   - build
@@ -29,3 +34,8 @@ deploy:
   only:
     refs:
       - master
+  # only deploy with human intervention
+  #when: manual
+  artifacts:  # Deployment configuration is saved here
+    paths:
+      - ./artifacts
