@@ -56,4 +56,4 @@ deploy: ## Deploy application
 	@GITLAB_RUNNER_ID="$(shell docker ps -q -f "label=com.gitlab.gitlab-runner.job.id=$(CI_JOB_ID)" --format '{{.Names}}' )" \
 		ops/trap_command.sh \
 		"docker-compose -p {{ PROJECT_NAME }}-deploy-$(VERSION)_$(CI_JOB_ID) -f ops/docker-compose.ops.yml run -T --rm -e VERSION=$(VERSION) deploy-$(ENVIRONMENT)" \
-		"docker-compose -p {{ PROJECT_NAME }}-deploy-$(VERSION)_$(CI_JOB_ID) -f ops/docker-compose.ops.yml down -v --remophe-orphans"
+		"docker-compose -p {{ PROJECT_NAME }}-deploy-$(VERSION)_$(CI_JOB_ID) -f ops/docker-compose.ops.yml down -v --remove-orphans"
