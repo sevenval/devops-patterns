@@ -3,10 +3,10 @@ services:
 
   deploy-development:
     build:
-      context: ./ops/sloppy-deployment
+      context: ./sloppy-deployment
     env_file:
-      - environments/development/sloppy.env
-      - environments/development/myapp.env
+      - ../environments/development/sloppy.env
+      - ../environments/development/myapp.env
     environment:
       - SLOPPY_APITOKEN
       - DRY_RUN  # Do nothing but print out the configuration.

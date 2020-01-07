@@ -10,7 +10,7 @@
 ## Variables which can be overiden on the command line.
 
 # Format: 2019-01-29-c515510
-VERSION ?= "$(shell git show --quiet --format="%cd-%h" --date=short)"
+VERSION ?= "$(shell git show --quiet --format="%cd-%H" --date=short)"
 ENVIRONMENT ?= "development"
 REGISTRY ?= "docker.io/7val"
 
@@ -57,3 +57,10 @@ deploy: ## Deploy application
 		ops/trap_command.sh \
 		"docker-compose -p {{ PROJECT_NAME }}-deploy-$(VERSION)_$(CI_JOB_ID) -f ops/docker-compose.ops.yml run -T --rm -e VERSION=$(VERSION) deploy-$(ENVIRONMENT)" \
 		"docker-compose -p {{ PROJECT_NAME }}-deploy-$(VERSION)_$(CI_JOB_ID) -f ops/docker-compose.ops.yml down -v --remove-orphans"
+
+.PHONY: _docker-login
+# Login to Docker registry, but only if we are not on a tty, e.g. non-interactive.
+_docker-login:
+	@if ! tty -s ; then \
+		echo "$(REGISTRY_PASSWORD)" | docker login -u="$(REGISTRY_USERNAME)" --password-stdin ; \
+	fi
