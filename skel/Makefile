@@ -36,7 +36,7 @@ build: ## Build image
 		--target release \
 		services/$(SERVICE)
 
-push: ## Push image
+push: _docker-login ## Push image
 	@docker push $(IMAGE_NAME):$(VERSION)
 
 deploy: ## Deploy application
