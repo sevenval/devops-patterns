@@ -1,4 +1,4 @@
-.PHONY: version build push deploy
+.PHONY: version build push deploy help
 
 # Builds, pushes and deploys the project. If needed all management operations
 # can be added here too.
@@ -39,9 +39,9 @@ build: _pull ## Build image
 # Besides pushing, a latest tag is created and pushed, so that the build cache
 # can be used by "build" to it's fullest extent.
 push: _docker-login ## Push image
-	@docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest \
-		docker push $(IMAGE_NAME):$(VERSION) \
-		docker push $(IMAGE_NAME):latest
+	@docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest
+	@docker push $(IMAGE_NAME):$(VERSION)
+	@docker push $(IMAGE_NAME):latest
 
 deploy: ## Deploy application
 	# Build deploy

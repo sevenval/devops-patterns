@@ -21,8 +21,8 @@ stages:
 build:
   stage: build
   script:
-    - make build
-    - make push
+    - time make build
+    - time make push
   only:
     refs:
       - master
@@ -30,7 +30,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - make deploy
+    - time make deploy
   only:
     refs:
       - master
