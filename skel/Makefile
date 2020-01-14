@@ -1,4 +1,4 @@
-.PHONY: version build push deploy
+.PHONY: version build push deploy help
 
 # Builds, pushes and deploys the project. If needed all management operations
 # can be added here too.
@@ -29,15 +29,19 @@ help:
 version: ## Print current version
 	@echo $(VERSION)
 
-build: ## Build image
+build: _pull ## Build image
 	@docker build \
 		-t $(IMAGE_NAME):$(VERSION) \
 		-f services/$(SERVICE)/Dockerfile \
 		--target release \
 		services/$(SERVICE)
 
+# Besides pushing, a latest tag is created and pushed, so that the build cache
+# can be used by "build" to it's fullest extent.
 push: _docker-login ## Push image
+	@docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest
 	@docker push $(IMAGE_NAME):$(VERSION)
+	@docker push $(IMAGE_NAME):latest
 
 deploy: ## Deploy application
 	# Build deploy
@@ -64,3 +68,9 @@ _docker-login:
 	@if ! tty -s ; then \
 		echo "$(REGISTRY_PASSWORD)" | docker login -u="$(REGISTRY_USERNAME)" --password-stdin ; \
 	fi
+
+.PHONY: _pull
+# Pull the latest tag of an image. Used by "build" to leverage build cache if the
+# cache should be emtpy.
+_pull:
+	@docker pull $(IMAGE_NAME)
